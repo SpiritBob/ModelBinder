@@ -34,5 +34,14 @@ namespace UnknownModelBindersExample.Controllers
         {
             return Ok(example);
         }
+        
+        // Noice that when binding is done from the body, our StringBinderProvider only gets hit once - with the complex type
+        // Why is the behaviour different here than when we have a [FromQuery] attribute applied?
+        // Shouldn't [FromQuery] work the same way, and/or only provide its properties if the returned complex type is not handled?
+        [HttpPost("Three")]
+        public IActionResult PostFromBody([FromBody] ExampleObject example)
+        {
+            return Ok(example);
+        }
     }
 }
